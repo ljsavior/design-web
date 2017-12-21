@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CommandExample {
+public class PostureExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CommandExample() {
+    public PostureExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,203 +165,203 @@ public class CommandExample {
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionIsNull() {
-            addCriterion("command_function is null");
+        public Criteria andNameIsNull() {
+            addCriterion("name is null");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionIsNotNull() {
-            addCriterion("command_function is not null");
+        public Criteria andNameIsNotNull() {
+            addCriterion("name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionEqualTo(Byte value) {
-            addCriterion("command_function =", value, "commandFunction");
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("name =", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionNotEqualTo(Byte value) {
-            addCriterion("command_function <>", value, "commandFunction");
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("name <>", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionGreaterThan(Byte value) {
-            addCriterion("command_function >", value, "commandFunction");
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("name >", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionGreaterThanOrEqualTo(Byte value) {
-            addCriterion("command_function >=", value, "commandFunction");
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("name >=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionLessThan(Byte value) {
-            addCriterion("command_function <", value, "commandFunction");
+        public Criteria andNameLessThan(String value) {
+            addCriterion("name <", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionLessThanOrEqualTo(Byte value) {
-            addCriterion("command_function <=", value, "commandFunction");
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("name <=", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionIn(List<Byte> values) {
-            addCriterion("command_function in", values, "commandFunction");
+        public Criteria andNameLike(String value) {
+            addCriterion("name like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionNotIn(List<Byte> values) {
-            addCriterion("command_function not in", values, "commandFunction");
+        public Criteria andNameNotLike(String value) {
+            addCriterion("name not like", value, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionBetween(Byte value1, Byte value2) {
-            addCriterion("command_function between", value1, value2, "commandFunction");
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("name in", values, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandFunctionNotBetween(Byte value1, Byte value2) {
-            addCriterion("command_function not between", value1, value2, "commandFunction");
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("name not in", values, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionIsNull() {
-            addCriterion("command_description is null");
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("name between", value1, value2, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionIsNotNull() {
-            addCriterion("command_description is not null");
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("name not between", value1, value2, "name");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionEqualTo(String value) {
-            addCriterion("command_description =", value, "commandDescription");
+        public Criteria andPicPathIsNull() {
+            addCriterion("pic_path is null");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionNotEqualTo(String value) {
-            addCriterion("command_description <>", value, "commandDescription");
+        public Criteria andPicPathIsNotNull() {
+            addCriterion("pic_path is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionGreaterThan(String value) {
-            addCriterion("command_description >", value, "commandDescription");
+        public Criteria andPicPathEqualTo(String value) {
+            addCriterion("pic_path =", value, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionGreaterThanOrEqualTo(String value) {
-            addCriterion("command_description >=", value, "commandDescription");
+        public Criteria andPicPathNotEqualTo(String value) {
+            addCriterion("pic_path <>", value, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionLessThan(String value) {
-            addCriterion("command_description <", value, "commandDescription");
+        public Criteria andPicPathGreaterThan(String value) {
+            addCriterion("pic_path >", value, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionLessThanOrEqualTo(String value) {
-            addCriterion("command_description <=", value, "commandDescription");
+        public Criteria andPicPathGreaterThanOrEqualTo(String value) {
+            addCriterion("pic_path >=", value, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionLike(String value) {
-            addCriterion("command_description like", value, "commandDescription");
+        public Criteria andPicPathLessThan(String value) {
+            addCriterion("pic_path <", value, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionNotLike(String value) {
-            addCriterion("command_description not like", value, "commandDescription");
+        public Criteria andPicPathLessThanOrEqualTo(String value) {
+            addCriterion("pic_path <=", value, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionIn(List<String> values) {
-            addCriterion("command_description in", values, "commandDescription");
+        public Criteria andPicPathLike(String value) {
+            addCriterion("pic_path like", value, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionNotIn(List<String> values) {
-            addCriterion("command_description not in", values, "commandDescription");
+        public Criteria andPicPathNotLike(String value) {
+            addCriterion("pic_path not like", value, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionBetween(String value1, String value2) {
-            addCriterion("command_description between", value1, value2, "commandDescription");
+        public Criteria andPicPathIn(List<String> values) {
+            addCriterion("pic_path in", values, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andCommandDescriptionNotBetween(String value1, String value2) {
-            addCriterion("command_description not between", value1, value2, "commandDescription");
+        public Criteria andPicPathNotIn(List<String> values) {
+            addCriterion("pic_path not in", values, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionIsNull() {
-            addCriterion("return_data_description is null");
+        public Criteria andPicPathBetween(String value1, String value2) {
+            addCriterion("pic_path between", value1, value2, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionIsNotNull() {
-            addCriterion("return_data_description is not null");
+        public Criteria andPicPathNotBetween(String value1, String value2) {
+            addCriterion("pic_path not between", value1, value2, "picPath");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionEqualTo(String value) {
-            addCriterion("return_data_description =", value, "returnDataDescription");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionNotEqualTo(String value) {
-            addCriterion("return_data_description <>", value, "returnDataDescription");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionGreaterThan(String value) {
-            addCriterion("return_data_description >", value, "returnDataDescription");
+        public Criteria andTypeEqualTo(Byte value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionGreaterThanOrEqualTo(String value) {
-            addCriterion("return_data_description >=", value, "returnDataDescription");
+        public Criteria andTypeNotEqualTo(Byte value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionLessThan(String value) {
-            addCriterion("return_data_description <", value, "returnDataDescription");
+        public Criteria andTypeGreaterThan(Byte value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionLessThanOrEqualTo(String value) {
-            addCriterion("return_data_description <=", value, "returnDataDescription");
+        public Criteria andTypeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionLike(String value) {
-            addCriterion("return_data_description like", value, "returnDataDescription");
+        public Criteria andTypeLessThan(Byte value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionNotLike(String value) {
-            addCriterion("return_data_description not like", value, "returnDataDescription");
+        public Criteria andTypeLessThanOrEqualTo(Byte value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionIn(List<String> values) {
-            addCriterion("return_data_description in", values, "returnDataDescription");
+        public Criteria andTypeIn(List<Byte> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionNotIn(List<String> values) {
-            addCriterion("return_data_description not in", values, "returnDataDescription");
+        public Criteria andTypeNotIn(List<Byte> values) {
+            addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionBetween(String value1, String value2) {
-            addCriterion("return_data_description between", value1, value2, "returnDataDescription");
+        public Criteria andTypeBetween(Byte value1, Byte value2) {
+            addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReturnDataDescriptionNotBetween(String value1, String value2) {
-            addCriterion("return_data_description not between", value1, value2, "returnDataDescription");
+        public Criteria andTypeNotBetween(Byte value1, Byte value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
 
@@ -482,146 +482,6 @@ public class CommandExample {
 
         public Criteria andLastModTimeNotBetween(Date value1, Date value2) {
             addCriterion("last_mod_time not between", value1, value2, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdIsNull() {
-            addCriterion("mod_user_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdIsNotNull() {
-            addCriterion("mod_user_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdEqualTo(String value) {
-            addCriterion("mod_user_id =", value, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdNotEqualTo(String value) {
-            addCriterion("mod_user_id <>", value, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdGreaterThan(String value) {
-            addCriterion("mod_user_id >", value, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdGreaterThanOrEqualTo(String value) {
-            addCriterion("mod_user_id >=", value, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdLessThan(String value) {
-            addCriterion("mod_user_id <", value, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdLessThanOrEqualTo(String value) {
-            addCriterion("mod_user_id <=", value, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdLike(String value) {
-            addCriterion("mod_user_id like", value, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdNotLike(String value) {
-            addCriterion("mod_user_id not like", value, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdIn(List<String> values) {
-            addCriterion("mod_user_id in", values, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdNotIn(List<String> values) {
-            addCriterion("mod_user_id not in", values, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdBetween(String value1, String value2) {
-            addCriterion("mod_user_id between", value1, value2, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andModUserIdNotBetween(String value1, String value2) {
-            addCriterion("mod_user_id not between", value1, value2, "modUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksIsNull() {
-            addCriterion("remarks is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksIsNotNull() {
-            addCriterion("remarks is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksEqualTo(String value) {
-            addCriterion("remarks =", value, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksNotEqualTo(String value) {
-            addCriterion("remarks <>", value, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksGreaterThan(String value) {
-            addCriterion("remarks >", value, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksGreaterThanOrEqualTo(String value) {
-            addCriterion("remarks >=", value, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksLessThan(String value) {
-            addCriterion("remarks <", value, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksLessThanOrEqualTo(String value) {
-            addCriterion("remarks <=", value, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksLike(String value) {
-            addCriterion("remarks like", value, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksNotLike(String value) {
-            addCriterion("remarks not like", value, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksIn(List<String> values) {
-            addCriterion("remarks in", values, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksNotIn(List<String> values) {
-            addCriterion("remarks not in", values, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksBetween(String value1, String value2) {
-            addCriterion("remarks between", value1, value2, "remarks");
-            return (Criteria) this;
-        }
-
-        public Criteria andRemarksNotBetween(String value1, String value2) {
-            addCriterion("remarks not between", value1, value2, "remarks");
             return (Criteria) this;
         }
     }

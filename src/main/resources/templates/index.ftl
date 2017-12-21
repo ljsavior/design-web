@@ -120,39 +120,12 @@
 
             <ul class="nav nav-list" id="menu_bar">
                 <li>
-                    <a href="${rc.contextPath}/command/list.htm">
+                    <a href="${rc.contextPath}/user/list.htm">
                         <i class="icon-dashboard"></i>
-                        <span class="menu-text"> 命令管理 </span>
+                        <span class="menu-text">用户管理</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="#" class="dropdown-toggle">
-                        <i class="icon-file-alt"></i>
-
-                        <span class="menu-text">
-                            其他页面
-                        </span>
-
-                        <b class="arrow icon-angle-down"></b>
-                    </a>
-
-                    <ul class="submenu">
-                        <li>
-                            <a href="${rc.contextPath}/page2.htm">
-                                <i class="icon-double-angle-right"></i>
-                                二级页面1
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="${rc.contextPath}/page3.htm">
-                                <i class="icon-double-angle-right"></i>
-                                二级页面2
-                            </a>
-                        </li>
-                    </ul>
-                </li>
             </ul><!-- /.nav-list -->
 
             <div class="sidebar-collapse" id="sidebar-collapse">
