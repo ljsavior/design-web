@@ -126,6 +126,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="${rc.contextPath}/posture/list.htm">
+                        <i class="icon-dashboard"></i>
+                        <span class="menu-text">动作管理</span>
+                    </a>
+                </li>
+
             </ul><!-- /.nav-list -->
 
             <div class="sidebar-collapse" id="sidebar-collapse">
