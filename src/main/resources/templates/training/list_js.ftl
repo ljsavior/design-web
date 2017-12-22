@@ -1,18 +1,17 @@
 <script src="${rc.contextPath}/dataTables/js/jquery.dataTables.min.js"></script>
 <script src="${rc.contextPath}/dataTables/js/dataTables.bootstrap.min.js"></script>
-<script src="${rc.contextPath}/colorbox/jquery.colorbox-min.js"></script>
 
 <script>
     function addRecord() {
         showModal({
-            title: "添加动作",
+            title: "添加训练",
             buttonText: "提交",
-            url: "${rc.contextPath}/posture/addOrUpdate.htm",
+            url: "${rc.contextPath}/training/addOrUpdate.htm",
             buttonFunction: function() {
-                confirmAlert("添加动作", "确认添加？", function () {
+                confirmAlert("添加训练", "确认添加？", function () {
                     $.ajax({
                         type:'post',
-                        url:'${rc.contextPath}/posture/addOrUpdate.json',
+                        url:'${rc.contextPath}/training/addOrUpdate.json',
                         data:$("#dataForm").serialize(),
                         cache:false,
                         dataType:'json',
@@ -24,7 +23,7 @@
 
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            errorAlert("添加动作", "请求失败", function () {
+                            errorAlert("添加训练", "请求失败", function () {
                                 closeModal();
                                 refreshTable();
                             });
@@ -37,28 +36,28 @@
 
     function editRecord(id) {
         showModal({
-            title: "编辑动作",
+            title: "编辑训练",
             buttonText: "提交",
-            url: "${rc.contextPath}/posture/addOrUpdate.htm",
+            url: "${rc.contextPath}/training/addOrUpdate.htm",
             data: {
               id: id
             },
             buttonFunction: function() {
-                confirmAlert("编辑动作", "确认提交？", function () {
+                confirmAlert("编辑训练", "确认提交？", function () {
                     $.ajax({
                         type:'post',
-                        url:'${rc.contextPath}/posture/addOrUpdate.json',
+                        url:'${rc.contextPath}/training/addOrUpdate.json',
                         data:$("#dataForm").serialize(),
                         cache:false,
                         dataType:'json',
                         success:function(data) {
-                            successAlert("编辑动作", data.msg, function () {
+                            successAlert("编辑训练", data.msg, function () {
                                 closeModal();
                                 refreshTable();
                             });
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            errorAlert("编辑动作", "请求失败", function() {
+                            errorAlert("编辑训练", "请求失败", function() {
                                 closeModal();
                                 refreshTable();
                             });
@@ -70,23 +69,23 @@
     }
 
     function deleteRecord(id) {
-        confirmAlert("删除动作", "确认删除？", function () {
+        confirmAlert("删除训练", "确认删除？", function () {
             $.ajax({
                 type:'post',
-                url:'${rc.contextPath}/posture/delete.json',
+                url:'${rc.contextPath}/training/delete.json',
                 data:{
                     id: id
                 },
                 cache:false,
                 dataType:'json',
                 success:function(data) {
-                    successAlert("删除动作", data.msg, function () {
+                    successAlert("删除训练", data.msg, function () {
                         closeModal();
                         refreshTable();
                     });
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    errorAlert("删除动作", "请求失败", function () {
+                    errorAlert("删除训练", "请求失败", function () {
                         closeModal();
                         refreshTable();
                     });
@@ -105,32 +104,15 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "${rc.contextPath}/posture/query.json",
+                "url": "${rc.contextPath}/training/query.json",
                 "data": function(d) {
                     d.name = $('#name').val();
                 }
             },
-            "columnDefs": [{
-                "render": function(data, type, row) {
-                    var img = '<a class="green colorbox_img" href="${rc.contextPath}/image' + data + '">' +
-                            '<i class="icon-search bigger-130"></i>' +
-                            '</a>';
-                    return img;
-                },
-                "targets": 2
-            },
+            "columnDefs": [
             {
-                "render": function(data, type, row) {
-                    if(data === '0') {
-                        data = 'Both';
-                    } else if(data === '1') {
-                        data = 'LeftArm';
-                    } else if(data === '2') {
-                        data = 'RightArm';
-                    }
-                    return data;
-                },
-                "targets": 3
+                "visible": false,
+                "targets": [0]
             },
             {
                 "render": function(data, type, row) {
@@ -142,7 +124,7 @@
                             '</a>';
                     return editButton + '&nbsp;&nbsp;&nbsp;&nbsp;' + deleteButton;
                 },
-                "targets": 5
+                "targets": 4
             }]
         });
 
@@ -152,9 +134,5 @@
         $('.dataTable').parent("div").css({
             "padding":"0px"
         });
-
-        myDataTable.on( 'draw', function () {
-            $(".colorbox_img").colorbox({rel:'colorbox_img', maxWidth: '100%', maxHeight: '100%'});
-        } );
     });
 </script>

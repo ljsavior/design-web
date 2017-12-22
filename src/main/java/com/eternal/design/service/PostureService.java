@@ -10,7 +10,7 @@ public interface PostureService {
 
     Posture findById(Integer id);
 
-    Posture insertOrUpdate(Posture user);
+    Posture insertOrUpdate(Posture posture);
 
     int deleteById(Integer id);
 }

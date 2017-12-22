@@ -133,6 +133,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="${rc.contextPath}/training/list.htm">
+                        <i class="icon-dashboard"></i>
+                        <span class="menu-text">训练管理</span>
+                    </a>
+                </li>
+
             </ul><!-- /.nav-list -->
 
             <div class="sidebar-collapse" id="sidebar-collapse">

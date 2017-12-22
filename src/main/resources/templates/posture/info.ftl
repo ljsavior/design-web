@@ -27,7 +27,6 @@
 
                 <div class="col-sm-9">
                     <textarea name="data" id="data">${(item.data)!}</textarea>
-                    <#--<input type="text" name="data" value="${(item.data)!}" id="data" class="col-xs-10 col-sm-5" />-->
                 </div>
             </div>
 
