@@ -5,6 +5,8 @@ import com.eternal.design.entity.Training;
 import com.eternal.design.entity.TrainingExample;
 import com.eternal.design.page.PageResult;
 
+import java.util.List;
+
 public interface TrainingService {
     PageResult<Training> findByPage(TrainingExample example);
 
@@ -13,4 +15,8 @@ public interface TrainingService {
     Training insertOrUpdate(Training training);
 
     int deleteById(Integer id);
+
+    List<Training> findAll();
+
+    Training findByName(String name);
 }

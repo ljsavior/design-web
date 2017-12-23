@@ -5,9 +5,13 @@ import java.util.Date;
 public class TrainingRecord {
     private Integer id;
 
-    private Integer trainingId;
+    private String username;
 
-    private Integer userId;
+    private String trainingName;
+
+    private String timesUsed;
+
+    private String result;
 
     private Integer score;
 
@@ -21,20 +25,36 @@ public class TrainingRecord {
         this.id = id;
     }
 
-    public Integer getTrainingId() {
-        return trainingId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setTrainingId(Integer trainingId) {
-        this.trainingId = trainingId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getTrainingName() {
+        return trainingName;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setTrainingName(String trainingName) {
+        this.trainingName = trainingName;
+    }
+
+    public String getTimesUsed() {
+        return timesUsed;
+    }
+
+    public void setTimesUsed(String timesUsed) {
+        this.timesUsed = timesUsed;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public Integer getScore() {

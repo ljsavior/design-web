@@ -51,3 +51,7 @@ logging:
 pagehelper:
   helper-dialect: mysql
   reasonable: true
+
+
+myConfig:
+  host: http://127.0.0.1:8080

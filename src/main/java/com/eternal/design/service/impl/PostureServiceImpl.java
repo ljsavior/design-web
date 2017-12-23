@@ -9,6 +9,8 @@ import com.eternal.design.service.PostureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostureServiceImpl implements PostureService {
     @Autowired
@@ -37,5 +39,15 @@ public class PostureServiceImpl implements PostureService {
     @Override
     public int deleteById(Integer id) {
         return postureMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Posture> findByIds(List<Integer> idList) {
+        PostureExample postureExample = new PostureExample();
+        PostureExample.Criteria criteria = postureExample.createCriteria();
+
+        criteria.andIdIn(idList);
+
+        return postureMapper.selectByExampleWithBLOBs(postureExample);
     }
 }

@@ -3,14 +3,12 @@
 <mapper namespace="com.eternal.design.mapper.TrainingRecordMapper">
   <resultMap id="BaseResultMap" type="com.eternal.design.entity.TrainingRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="training_id" jdbcType="INTEGER" property="trainingId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="training_name" jdbcType="VARCHAR" property="trainingName" />
+    <result column="times_used" jdbcType="VARCHAR" property="timesUsed" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="score" jdbcType="INTEGER" property="score" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.eternal.design.entity.TrainingRecordWithBLOBs">
-    <result column="times_used" jdbcType="LONGVARCHAR" property="timesUsed" />
-    <result column="result" jdbcType="LONGVARCHAR" property="result" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,27 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, training_id, user_id, score, create_time
+    id, username, training_name, times_used, result, score, create_time
   </sql>
-  <sql id="Blob_Column_List">
-    times_used, result
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.eternal.design.entity.TrainingRecordExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from training_record
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.eternal.design.entity.TrainingRecordExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -106,11 +85,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from training_record
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -124,31 +101,25 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.eternal.design.entity.TrainingRecordWithBLOBs">
-    insert into training_record (id, training_id, user_id, 
-      score, create_time, times_used, 
-      result)
-    values (#{id,jdbcType=INTEGER}, #{trainingId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{score,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{timesUsed,jdbcType=LONGVARCHAR}, 
-      #{result,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.eternal.design.entity.TrainingRecord">
+    insert into training_record (id, username, training_name, 
+      times_used, result, score, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{trainingName,jdbcType=VARCHAR}, 
+      #{timesUsed,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.eternal.design.entity.TrainingRecordWithBLOBs">
+  <insert id="insertSelective" parameterType="com.eternal.design.entity.TrainingRecord">
     insert into training_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="trainingId != null">
-        training_id,
+      <if test="username != null">
+        username,
       </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="score != null">
-        score,
-      </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="trainingName != null">
+        training_name,
       </if>
       <if test="timesUsed != null">
         times_used,
@@ -156,28 +127,34 @@
       <if test="result != null">
         result,
       </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="trainingId != null">
-        #{trainingId,jdbcType=INTEGER},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+      <if test="trainingName != null">
+        #{trainingName,jdbcType=VARCHAR},
+      </if>
+      <if test="timesUsed != null">
+        #{timesUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
       </if>
       <if test="score != null">
         #{score,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="timesUsed != null">
-        #{timesUsed,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="result != null">
-        #{result,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -193,11 +170,17 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.trainingId != null">
-        training_id = #{record.trainingId,jdbcType=INTEGER},
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
+      <if test="record.trainingName != null">
+        training_name = #{record.trainingName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timesUsed != null">
+        times_used = #{record.timesUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null">
+        result = #{record.result,jdbcType=VARCHAR},
       </if>
       <if test="record.score != null">
         score = #{record.score,jdbcType=INTEGER},
@@ -205,26 +188,7 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.timesUsed != null">
-        times_used = #{record.timesUsed,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.result != null">
-        result = #{record.result,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update training_record
-    set id = #{record.id,jdbcType=INTEGER},
-      training_id = #{record.trainingId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      score = #{record.score,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      times_used = #{record.timesUsed,jdbcType=LONGVARCHAR},
-      result = #{record.result,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -232,22 +196,30 @@
   <update id="updateByExample" parameterType="map">
     update training_record
     set id = #{record.id,jdbcType=INTEGER},
-      training_id = #{record.trainingId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      training_name = #{record.trainingName,jdbcType=VARCHAR},
+      times_used = #{record.timesUsed,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=VARCHAR},
       score = #{record.score,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eternal.design.entity.TrainingRecordWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.eternal.design.entity.TrainingRecord">
     update training_record
     <set>
-      <if test="trainingId != null">
-        training_id = #{trainingId,jdbcType=INTEGER},
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="trainingName != null">
+        training_name = #{trainingName,jdbcType=VARCHAR},
+      </if>
+      <if test="timesUsed != null">
+        times_used = #{timesUsed,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
       </if>
       <if test="score != null">
         score = #{score,jdbcType=INTEGER},
@@ -255,29 +227,15 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="timesUsed != null">
-        times_used = #{timesUsed,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="result != null">
-        result = #{result,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.eternal.design.entity.TrainingRecordWithBLOBs">
-    update training_record
-    set training_id = #{trainingId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      score = #{score,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      times_used = #{timesUsed,jdbcType=LONGVARCHAR},
-      result = #{result,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.eternal.design.entity.TrainingRecord">
     update training_record
-    set training_id = #{trainingId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
+    set username = #{username,jdbcType=VARCHAR},
+      training_name = #{trainingName,jdbcType=VARCHAR},
+      times_used = #{timesUsed,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

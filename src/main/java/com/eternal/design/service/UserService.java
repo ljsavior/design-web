@@ -13,4 +13,6 @@ public interface UserService {
     User insertOrUpdate(User user);
 
     int deleteById(Integer id);
+
+    User findByUsername(String username);
 }

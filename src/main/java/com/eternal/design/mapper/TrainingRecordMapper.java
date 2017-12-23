@@ -2,7 +2,6 @@ package com.eternal.design.mapper;
 
 import com.eternal.design.entity.TrainingRecord;
 import com.eternal.design.entity.TrainingRecordExample;
-import com.eternal.design.entity.TrainingRecordWithBLOBs;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,25 +12,19 @@ public interface TrainingRecordMapper {
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(TrainingRecordWithBLOBs record);
+    int insert(TrainingRecord record);
 
-    int insertSelective(TrainingRecordWithBLOBs record);
-
-    List<TrainingRecordWithBLOBs> selectByExampleWithBLOBs(TrainingRecordExample example);
+    int insertSelective(TrainingRecord record);
 
     List<TrainingRecord> selectByExample(TrainingRecordExample example);
 
-    TrainingRecordWithBLOBs selectByPrimaryKey(Integer id);
+    TrainingRecord selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TrainingRecordWithBLOBs record, @Param("example") TrainingRecordExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") TrainingRecordWithBLOBs record, @Param("example") TrainingRecordExample example);
+    int updateByExampleSelective(@Param("record") TrainingRecord record, @Param("example") TrainingRecordExample example);
 
     int updateByExample(@Param("record") TrainingRecord record, @Param("example") TrainingRecordExample example);
 
-    int updateByPrimaryKeySelective(TrainingRecordWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(TrainingRecordWithBLOBs record);
+    int updateByPrimaryKeySelective(TrainingRecord record);
 
     int updateByPrimaryKey(TrainingRecord record);
 }

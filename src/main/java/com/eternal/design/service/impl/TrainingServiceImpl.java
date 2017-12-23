@@ -9,6 +9,8 @@ import com.eternal.design.service.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TrainingServiceImpl implements TrainingService {
     @Autowired
@@ -38,4 +40,22 @@ public class TrainingServiceImpl implements TrainingService {
     public int deleteById(Integer id) {
         return trainingMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<Training> findAll() {
+        return trainingMapper.selectByExampleWithBLOBs(new TrainingExample());
+    }
+
+    @Override
+    public Training findByName(String name) {
+        TrainingExample example = new TrainingExample();
+        TrainingExample.Criteria criteria = example.createCriteria();
+
+        criteria.andNameEqualTo(name);
+
+        return trainingMapper.selectByExampleWithBLOBs(example).stream()
+                .findFirst()
+                .orElse(null);
+    }
+
 }
