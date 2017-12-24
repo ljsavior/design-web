@@ -9,6 +9,8 @@ import com.eternal.design.service.TrainingRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TrainingRecordServiceImpl implements TrainingRecordService {
     @Autowired
@@ -37,5 +39,10 @@ public class TrainingRecordServiceImpl implements TrainingRecordService {
     @Override
     public int deleteById(Integer id) {
         return trainingRecordMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<TrainingRecord> findByExample(TrainingRecordExample example) {
+        return trainingRecordMapper.selectByExample(example);
     }
 }

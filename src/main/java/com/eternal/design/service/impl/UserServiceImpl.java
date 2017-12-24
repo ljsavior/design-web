@@ -9,6 +9,8 @@ import com.eternal.design.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -49,5 +51,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByExample(example).stream()
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userMapper.selectByExample(new UserExample());
     }
 }

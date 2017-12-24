@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -83,5 +84,13 @@ public class UserController {
         boolean success = res == 1;
         String msg = success ? "删除成功" : "删除失败";
         return new Result(success, msg, null);
+    }
+
+    @RequestMapping("/user/usernameList.json")
+    @ResponseBody
+    public Object usernameList() {
+        return userService.findAll().stream()
+                .map(User::getUsername)
+                .collect(Collectors.toList());
     }
 }

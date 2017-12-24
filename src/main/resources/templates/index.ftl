@@ -140,6 +140,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="${rc.contextPath}/trainingRecord/list.htm">
+                        <i class="icon-dashboard"></i>
+                        <span class="menu-text">训练记录管理</span>
+                    </a>
+                </li>
+
             </ul><!-- /.nav-list -->
 
             <div class="sidebar-collapse" id="sidebar-collapse">

@@ -4,6 +4,8 @@ import com.eternal.design.entity.TrainingRecord;
 import com.eternal.design.entity.TrainingRecordExample;
 import com.eternal.design.page.PageResult;
 
+import java.util.List;
+
 public interface TrainingRecordService {
     PageResult<TrainingRecord> findByPage(TrainingRecordExample example);
 
@@ -12,4 +14,6 @@ public interface TrainingRecordService {
     TrainingRecord insertOrUpdate(TrainingRecord trainingRecord);
 
     int deleteById(Integer id);
+
+    List<TrainingRecord> findByExample(TrainingRecordExample example);
 }

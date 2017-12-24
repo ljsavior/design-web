@@ -5,6 +5,8 @@ import com.eternal.design.entity.User;
 import com.eternal.design.entity.UserExample;
 import com.eternal.design.page.PageResult;
 
+import java.util.List;
+
 public interface UserService {
     PageResult<User> findByPage(UserExample example);
 
@@ -15,4 +17,6 @@ public interface UserService {
     int deleteById(Integer id);
 
     User findByUsername(String username);
+
+    List<User> findAll();
 }
