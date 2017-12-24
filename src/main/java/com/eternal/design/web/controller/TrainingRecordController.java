@@ -142,7 +142,7 @@ public class TrainingRecordController {
 
     @RequestMapping("/trainingRecord/trend.htm")
     public String trend() {
-        return "/trainingRecord/trend";
+        return "trainingRecord/trend";
     }
 
 
