@@ -167,7 +167,7 @@
                 <executions>
                     <execution>
                         <id>Generate MyBatis Artifacts</id>
-                        <phase>package</phase>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -184,6 +184,13 @@
         </plugins>
 
         <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
