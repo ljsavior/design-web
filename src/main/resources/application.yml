@@ -1,6 +1,6 @@
 server:
   port: 8080
-  context-path: /design-web/
+  #context-path: /design-web/
 
 
 management:
@@ -37,6 +37,18 @@ spring:
     cache: false
     suffix: .ftl
     request-context-attribute: rc
+
+  redis:
+    database: 0
+    host: 120.27.93.16
+    port: 6379
+    password: eternal
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 2000
 
 
 mybatis:
