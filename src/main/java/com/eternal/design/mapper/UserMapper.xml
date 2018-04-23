@@ -5,6 +5,12 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="role" jdbcType="BIT" property="role" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="last_mod_time" jdbcType="TIMESTAMP" property="lastModTime" />
   </resultMap>
@@ -67,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, create_time, last_mod_time
+    id, username, password, role, sex, name, birthday, mobile_phone, mark, create_time, 
+    last_mod_time
   </sql>
   <select id="selectByExample" parameterType="com.eternal.design.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -101,9 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.eternal.design.entity.User">
     insert into user (id, username, password, 
-      create_time, last_mod_time)
+      role, sex, name, birthday, 
+      mobile_phone, mark, create_time, 
+      last_mod_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{lastModTime,jdbcType=TIMESTAMP})
+      #{role,jdbcType=BIT}, #{sex,jdbcType=BIT}, #{name,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{mobilePhone,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastModTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.eternal.design.entity.User">
     insert into user
@@ -116,6 +127,24 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone,
+      </if>
+      <if test="mark != null">
+        mark,
       </if>
       <if test="createTime != null">
         create_time,
@@ -133,6 +162,24 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=BIT},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -160,6 +207,24 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.role != null">
+        role = #{record.role,jdbcType=BIT},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=BIT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilePhone != null">
+        mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -176,6 +241,12 @@
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=BIT},
+      sex = #{record.sex,jdbcType=BIT},
+      name = #{record.name,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
+      mark = #{record.mark,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -191,6 +262,24 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="role != null">
+        role = #{role,jdbcType=BIT},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -204,6 +293,12 @@
     update user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      role = #{role,jdbcType=BIT},
+      sex = #{sex,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_mod_time = #{lastModTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

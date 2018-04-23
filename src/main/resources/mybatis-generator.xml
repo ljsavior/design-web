@@ -10,7 +10,7 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--数据库链接地址账号密码-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://120.27.93.16:3306/design" userId="eternal" password="eternal" />
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://39.105.38.80:3306/design" userId="eternal" password="eternal" />
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
@@ -34,8 +34,5 @@
         </javaClientGenerator>
         <!--生成对应表及类名-->
         <table tableName="user" domainObjectName="User"></table>
-        <table tableName="posture" domainObjectName="Posture"></table>
-        <table tableName="training" domainObjectName="Training"></table>
-        <table tableName="training_record" domainObjectName="TrainingRecord"></table>
     </context>
 </generatorConfiguration>

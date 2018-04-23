@@ -9,6 +9,18 @@ public class User {
 
     private String password;
 
+    private Boolean role;
+
+    private Boolean sex;
+
+    private String name;
+
+    private String birthday;
+
+    private String mobilePhone;
+
+    private String mark;
+
     private Date createTime;
 
     private Date lastModTime;
@@ -35,6 +47,54 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getRole() {
+        return role;
+    }
+
+    public void setRole(Boolean role) {
+        this.role = role;
+    }
+
+    public Boolean getSex() {
+        return sex;
+    }
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 
     public Date getCreateTime() {

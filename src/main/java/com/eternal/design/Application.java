@@ -3,6 +3,7 @@ package com.eternal.design;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.eternal.design.web.interceptor.LoginInterceptor;
 import com.eternal.design.web.interceptor.PageInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -44,7 +45,14 @@ public class Application {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
-                registry.addInterceptor(new PageInterceptor()).addPathPatterns("/**/*.htm");
+                registry.addInterceptor(new LoginInterceptor())
+                        .addPathPatterns("/**/*.htm")
+                        .excludePathPatterns("/login.htm");
+
+                registry.addInterceptor(new PageInterceptor())
+                        .addPathPatterns("/**/*.htm")
+                        .excludePathPatterns("/login.htm");
+
                 super.addInterceptors(registry);
             }
         };
