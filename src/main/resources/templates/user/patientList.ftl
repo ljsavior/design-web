@@ -1,8 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <h3 class="header smaller lighter blue">姿势 posture</h3>
-
-        <button type="button" class="btn btn-sm btn-primary" onclick="addRecord()">添加</button>
+        <h3 class="header smaller lighter blue">负责的病患</h3>
 
         <div class="widget-box">
             <div class="widget-header">
@@ -12,7 +10,7 @@
             <div class="widget-body">
                 <div class="widget-main">
                     <form class="form-inline">
-                        <input type="text" id="name" class="input-large" placeholder="姿势名称" />
+                        <input type="text" id="username" class="input-large" placeholder="用户名" />
                         <button type="button" class="btn btn-info btn-sm" onclick="refreshTable()">
                             查询
                         </button>
@@ -31,12 +29,17 @@
             <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>姿势名称</th>
-                    <th>姿势图片</th>
-                    <th>姿势数据</th>
+                    <th>id</th>
+                    <th>用户名</th>
+                    <th>性别</th>
+                    <th>姓名</th>
+                    <th>出生日期</th>
+                    <th>手机</th>
                     <th>备注</th>
-                    <th>操作</th>
+                    <th>
+                        <i class="icon-time bigger-110 hidden-480"></i>
+                        创建时间
+                    </th>
                 </tr>
                 </thead>
             </table>

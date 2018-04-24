@@ -8,6 +8,7 @@
     <result column="type" jdbcType="TINYINT" property="type" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="last_mod_time" jdbcType="TIMESTAMP" property="lastModTime" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.eternal.design.entity.Posture">
     <result column="data" jdbcType="LONGVARCHAR" property="data" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, pic_path, type, create_time, last_mod_time
+    id, name, pic_path, type, create_time, last_mod_time, mark
   </sql>
   <sql id="Blob_Column_List">
     data
@@ -127,10 +128,10 @@
   <insert id="insert" parameterType="com.eternal.design.entity.Posture">
     insert into posture (id, name, pic_path, 
       type, create_time, last_mod_time, 
-      data)
+      mark, data)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{picPath,jdbcType=VARCHAR}, 
       #{type,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{lastModTime,jdbcType=TIMESTAMP}, 
-      #{data,jdbcType=LONGVARCHAR})
+      #{mark,jdbcType=VARCHAR}, #{data,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.eternal.design.entity.Posture">
     insert into posture
@@ -152,6 +153,9 @@
       </if>
       <if test="lastModTime != null">
         last_mod_time,
+      </if>
+      <if test="mark != null">
+        mark,
       </if>
       <if test="data != null">
         data,
@@ -175,6 +179,9 @@
       </if>
       <if test="lastModTime != null">
         #{lastModTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
       </if>
       <if test="data != null">
         #{data,jdbcType=LONGVARCHAR},
@@ -208,6 +215,9 @@
       <if test="record.lastModTime != null">
         last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
       <if test="record.data != null">
         data = #{record.data,jdbcType=LONGVARCHAR},
       </if>
@@ -224,6 +234,7 @@
       type = #{record.type,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP},
+      mark = #{record.mark,jdbcType=VARCHAR},
       data = #{record.data,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +247,8 @@
       pic_path = #{record.picPath,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP}
+      last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP},
+      mark = #{record.mark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,6 +271,9 @@
       <if test="lastModTime != null">
         last_mod_time = #{lastModTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
       <if test="data != null">
         data = #{data,jdbcType=LONGVARCHAR},
       </if>
@@ -272,6 +287,7 @@
       type = #{type,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_mod_time = #{lastModTime,jdbcType=TIMESTAMP},
+      mark = #{mark,jdbcType=VARCHAR},
       data = #{data,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -281,7 +297,8 @@
       pic_path = #{picPath,jdbcType=VARCHAR},
       type = #{type,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      last_mod_time = #{lastModTime,jdbcType=TIMESTAMP}
+      last_mod_time = #{lastModTime,jdbcType=TIMESTAMP},
+      mark = #{mark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

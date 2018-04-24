@@ -91,9 +91,9 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="${rc.contextPath}/logout">
                                 <i class="icon-off"></i>
-                                Logout
+                                退出登录
                             </a>
                         </li>
                     </ul>
@@ -119,33 +119,15 @@
             </script>
 
             <ul class="nav nav-list" id="menu_bar">
-                <li>
-                    <a href="${rc.contextPath}/user/list.htm">
-                        <i class="icon-dashboard"></i>
-                        <span class="menu-text">用户管理</span>
-                    </a>
-                </li>
 
-                <li>
-                    <a href="${rc.contextPath}/posture/list.htm">
-                        <i class="icon-dashboard"></i>
-                        <span class="menu-text">动作管理</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="${rc.contextPath}/training/list.htm">
-                        <i class="icon-dashboard"></i>
-                        <span class="menu-text">训练管理</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="${rc.contextPath}/trainingRecord/list.htm">
-                        <i class="icon-dashboard"></i>
-                        <span class="menu-text">训练记录管理</span>
-                    </a>
-                </li>
+                <#list current_user_menuList as item>
+                    <li>
+                        <a href="${rc.contextPath}${item.url}">
+                            <i class="${item.icon}"></i>
+                            <span class="menu-text">${item.text}</span>
+                        </a>
+                    </li>
+                </#list>
 
             </ul><!-- /.nav-list -->
 

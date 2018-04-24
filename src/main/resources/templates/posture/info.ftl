@@ -3,7 +3,7 @@
         <!-- PAGE CONTENT BEGINS -->
         <form class="form-horizontal" role="form" id="dataForm">
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 动作名称 </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 姿势名称 </label>
 
                 <div class="col-sm-9">
                     <input type="text" name="name" value="${(item.name)!}" id="name" class="col-xs-10 col-sm-5" />
@@ -13,7 +13,7 @@
             <div class="space-4"></div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 动作图片 </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 姿势图片 </label>
 
                 <div class="col-sm-9">
                     <input type="text" name="picPath" value="${(item.picPath)!}" id="picPath" class="col-xs-10 col-sm-5" />
@@ -23,7 +23,7 @@
             <div class="space-4"></div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 动作数据 </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 姿势数据 </label>
 
                 <div class="col-sm-9">
                     <textarea name="data" id="data">${(item.data)!}</textarea>
@@ -33,16 +33,13 @@
             <div class="space-4"></div>
 
             <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 动作类型 </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 备注 </label>
 
                 <div class="col-sm-9">
-                    <select id="type" name="type">
-                        <option value="0">Both</option>
-                        <option value="1">LeftArm</option>
-                        <option value="2">RightArm</option>
-                    </select>
+                    <textarea name="mark" id="mark">${(item.mark)!}</textarea>
                 </div>
             </div>
+
 
             <input type="hidden" name="id" value="${(item.id)!}">
         </form>

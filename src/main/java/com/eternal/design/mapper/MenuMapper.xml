@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eternal.design.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.eternal.design.entity.User">
+<mapper namespace="com.eternal.design.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.eternal.design.entity.Menu">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="role" jdbcType="SMALLINT" property="role" />
-    <result column="sex" jdbcType="SMALLINT" property="sex" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
-    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="text" jdbcType="VARCHAR" property="text" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="sort" jdbcType="SMALLINT" property="sort" />
     <result column="mark" jdbcType="VARCHAR" property="mark" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="last_mod_time" jdbcType="TIMESTAMP" property="lastModTime" />
@@ -73,16 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, role, sex, name, birthday, mobile_phone, mark, create_time, 
-    last_mod_time
+    id, text, url, icon, sort, mark, create_time, last_mod_time
   </sql>
-  <select id="selectByExample" parameterType="com.eternal.design.entity.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.eternal.design.entity.MenuExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,55 +89,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from menu
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.eternal.design.entity.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="com.eternal.design.entity.MenuExample">
+    delete from menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.eternal.design.entity.User">
-    insert into user (id, username, password, 
-      role, sex, name, 
-      birthday, mobile_phone, mark, 
+  <insert id="insert" parameterType="com.eternal.design.entity.Menu">
+    insert into menu (id, text, url, 
+      icon, sort, mark, 
       create_time, last_mod_time)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{role,jdbcType=SMALLINT}, #{sex,jdbcType=SMALLINT}, #{name,jdbcType=VARCHAR}, 
-      #{birthday,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=SMALLINT}, #{mark,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{lastModTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.eternal.design.entity.User">
-    insert into user
+  <insert id="insertSelective" parameterType="com.eternal.design.entity.Menu">
+    insert into menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        username,
+      <if test="text != null">
+        text,
       </if>
-      <if test="password != null">
-        password,
+      <if test="url != null">
+        url,
       </if>
-      <if test="role != null">
-        role,
+      <if test="icon != null">
+        icon,
       </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="birthday != null">
-        birthday,
-      </if>
-      <if test="mobilePhone != null">
-        mobile_phone,
+      <if test="sort != null">
+        sort,
       </if>
       <if test="mark != null">
         mark,
@@ -157,26 +142,17 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="text != null">
+        #{text,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
       </if>
-      <if test="role != null">
-        #{role,jdbcType=SMALLINT},
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
-        #{sex,jdbcType=SMALLINT},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        #{birthday,jdbcType=VARCHAR},
-      </if>
-      <if test="mobilePhone != null">
-        #{mobilePhone,jdbcType=VARCHAR},
+      <if test="sort != null">
+        #{sort,jdbcType=SMALLINT},
       </if>
       <if test="mark != null">
         #{mark,jdbcType=VARCHAR},
@@ -189,38 +165,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.eternal.design.entity.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="com.eternal.design.entity.MenuExample" resultType="java.lang.Long">
+    select count(*) from menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update menu
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.text != null">
+        text = #{record.text,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
       </if>
-      <if test="record.role != null">
-        role = #{record.role,jdbcType=SMALLINT},
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=SMALLINT},
-      </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.birthday != null">
-        birthday = #{record.birthday,jdbcType=VARCHAR},
-      </if>
-      <if test="record.mobilePhone != null">
-        mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=SMALLINT},
       </if>
       <if test="record.mark != null">
         mark = #{record.mark,jdbcType=VARCHAR},
@@ -237,15 +204,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update menu
     set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      role = #{record.role,jdbcType=SMALLINT},
-      sex = #{record.sex,jdbcType=SMALLINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      birthday = #{record.birthday,jdbcType=VARCHAR},
-      mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
+      text = #{record.text,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=SMALLINT},
       mark = #{record.mark,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP}
@@ -253,29 +217,20 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eternal.design.entity.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="com.eternal.design.entity.Menu">
+    update menu
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+      <if test="text != null">
+        text = #{text,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
       </if>
-      <if test="role != null">
-        role = #{role,jdbcType=SMALLINT},
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=SMALLINT},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="birthday != null">
-        birthday = #{birthday,jdbcType=VARCHAR},
-      </if>
-      <if test="mobilePhone != null">
-        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      <if test="sort != null">
+        sort = #{sort,jdbcType=SMALLINT},
       </if>
       <if test="mark != null">
         mark = #{mark,jdbcType=VARCHAR},
@@ -289,15 +244,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eternal.design.entity.User">
-    update user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      role = #{role,jdbcType=SMALLINT},
-      sex = #{sex,jdbcType=SMALLINT},
-      name = #{name,jdbcType=VARCHAR},
-      birthday = #{birthday,jdbcType=VARCHAR},
-      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.eternal.design.entity.Menu">
+    update menu
+    set text = #{text,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=SMALLINT},
       mark = #{mark,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_mod_time = #{lastModTime,jdbcType=TIMESTAMP}

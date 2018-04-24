@@ -33,6 +33,13 @@
                 <tr>
                     <th>id</th>
                     <th>用户名</th>
+                    <th>角色</th>
+                    <th>性别</th>
+                    <th>姓名</th>
+                    <th>出生日期</th>
+                    <th>手机</th>
+                    <th>备注</th>
+                    <th>教练</th>
                     <th>
                         <i class="icon-time bigger-110 hidden-480"></i>
                         创建时间

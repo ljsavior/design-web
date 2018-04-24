@@ -15,6 +15,8 @@ public class Posture {
 
     private Date lastModTime;
 
+    private String mark;
+
     private String data;
 
     public Integer getId() {
@@ -63,6 +65,14 @@ public class Posture {
 
     public void setLastModTime(Date lastModTime) {
         this.lastModTime = lastModTime;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 
     public String getData() {

@@ -33,6 +33,6 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="user" domainObjectName="User"></table>
+        <table tableName="role_menu_relationship" domainObjectName="RoleMenuRelationship"></table>
     </context>
 </generatorConfiguration>

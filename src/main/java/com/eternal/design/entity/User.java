@@ -9,9 +9,9 @@ public class User {
 
     private String password;
 
-    private Boolean role;
+    private Short role;
 
-    private Boolean sex;
+    private Short sex;
 
     private String name;
 
@@ -49,19 +49,19 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getRole() {
+    public Short getRole() {
         return role;
     }
 
-    public void setRole(Boolean role) {
+    public void setRole(Short role) {
         this.role = role;
     }
 
-    public Boolean getSex() {
+    public Short getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public void setSex(Short sex) {
         this.sex = sex;
     }
 

@@ -119,7 +119,7 @@
                             '</a>';
                     return editButton + '&nbsp;&nbsp;&nbsp;&nbsp;' + deleteButton;
                 },
-                "targets": 3
+                "targets": 10
             }]
         });
 

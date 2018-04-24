@@ -43,8 +43,8 @@ public class PostureController {
             row.add(String.valueOf(posture.getId()));
             row.add(posture.getName());
             row.add(posture.getPicPath());
-            row.add(String.valueOf(posture.getType()));
             row.add(posture.getData());
+            row.add(posture.getMark());
 
             return row;
         });
@@ -63,17 +63,7 @@ public class PostureController {
 
     @RequestMapping("/posture/addOrUpdate.json")
     @ResponseBody
-    public Object addOrUpdate(String id, String name, String picPath, Byte type, String data, Model model) {
-        Posture posture = new Posture();
-        posture.setName(name);
-        posture.setPicPath(picPath);
-        posture.setType(type);
-        posture.setData(data);
-
-        if(StringUtils.isNotEmpty(id)) {
-            posture.setId(Integer.parseInt(id));
-        }
-
+    public Object addOrUpdate(Posture posture) {
         postureService.insertOrUpdate(posture);
 
         return new Result(true, "提交成功", null);

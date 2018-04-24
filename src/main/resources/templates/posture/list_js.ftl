@@ -5,11 +5,11 @@
 <script>
     function addRecord() {
         showModal({
-            title: "添加动作",
+            title: "添加姿势",
             buttonText: "提交",
             url: "${rc.contextPath}/posture/addOrUpdate.htm",
             buttonFunction: function() {
-                confirmAlert("添加动作", "确认添加？", function () {
+                confirmAlert("添加姿势", "确认添加？", function () {
                     $.ajax({
                         type:'post',
                         url:'${rc.contextPath}/posture/addOrUpdate.json',
@@ -24,7 +24,7 @@
 
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            errorAlert("添加动作", "请求失败", function () {
+                            errorAlert("添加姿势", "请求失败", function () {
                                 closeModal();
                                 refreshTable();
                             });
@@ -37,14 +37,14 @@
 
     function editRecord(id) {
         showModal({
-            title: "编辑动作",
+            title: "编辑姿势",
             buttonText: "提交",
             url: "${rc.contextPath}/posture/addOrUpdate.htm",
             data: {
               id: id
             },
             buttonFunction: function() {
-                confirmAlert("编辑动作", "确认提交？", function () {
+                confirmAlert("编辑姿势", "确认提交？", function () {
                     $.ajax({
                         type:'post',
                         url:'${rc.contextPath}/posture/addOrUpdate.json',
@@ -52,13 +52,13 @@
                         cache:false,
                         dataType:'json',
                         success:function(data) {
-                            successAlert("编辑动作", data.msg, function () {
+                            successAlert("编辑姿势", data.msg, function () {
                                 closeModal();
                                 refreshTable();
                             });
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            errorAlert("编辑动作", "请求失败", function() {
+                            errorAlert("编辑姿势", "请求失败", function() {
                                 closeModal();
                                 refreshTable();
                             });
@@ -70,7 +70,7 @@
     }
 
     function deleteRecord(id) {
-        confirmAlert("删除动作", "确认删除？", function () {
+        confirmAlert("删除姿势", "确认删除？", function () {
             $.ajax({
                 type:'post',
                 url:'${rc.contextPath}/posture/delete.json',
@@ -80,13 +80,13 @@
                 cache:false,
                 dataType:'json',
                 success:function(data) {
-                    successAlert("删除动作", data.msg, function () {
+                    successAlert("删除姿势", data.msg, function () {
                         closeModal();
                         refreshTable();
                     });
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    errorAlert("删除动作", "请求失败", function () {
+                    errorAlert("删除姿势", "请求失败", function () {
                         closeModal();
                         refreshTable();
                     });

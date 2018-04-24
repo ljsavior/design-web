@@ -1,0 +1,69 @@
+server:
+  port: 8080
+  #context-path: /design-web/
+
+
+management:
+  security:
+    enabled: false
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://39.105.38.80:3306/design
+    username: eternal
+    password: eternal
+
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #连接池的配置信息
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j2
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+  freemarker:
+    cache: false
+    suffix: .ftl
+    request-context-attribute: rc
+
+  redis:
+    database: 0
+    host: 39.105.38.80
+    port: 6379
+    password: eternal
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 2000
+
+
+mybatis:
+  mapper-locations: classpath:com/eternal/design/*/mapper/*.xml
+  type-aliases-package: com.eternal.design.entity
+
+
+
+logging:
+  config: classpath:log4j2.yml
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+
+
+myConfig:
+  host: http://127.0.0.1:8080
