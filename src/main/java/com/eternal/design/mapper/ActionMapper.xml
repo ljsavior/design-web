@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.eternal.design.mapper.TrainingMapper">
-  <resultMap id="BaseResultMap" type="com.eternal.design.entity.Training">
+<mapper namespace="com.eternal.design.mapper.ActionMapper">
+  <resultMap id="BaseResultMap" type="com.eternal.design.entity.Action">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="data_file" jdbcType="VARCHAR" property="dataFile" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="last_mod_time" jdbcType="TIMESTAMP" property="lastModTime" />
-    <result column="type" jdbcType="SMALLINT" property="type" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.eternal.design.entity.Training">
-    <result column="postures" jdbcType="LONGVARCHAR" property="postures" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,20 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, create_time, last_mod_time, type
+    id, name, data_file, mark, create_time, last_mod_time
   </sql>
-  <sql id="Blob_Column_List">
-    postures
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.eternal.design.entity.TrainingExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExample" parameterType="com.eternal.design.entity.ActionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from training
+    from action
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,48 +84,32 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.eternal.design.entity.TrainingExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from training
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from training
+    from action
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from training
+    delete from action
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.eternal.design.entity.TrainingExample">
-    delete from training
+  <delete id="deleteByExample" parameterType="com.eternal.design.entity.ActionExample">
+    delete from action
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.eternal.design.entity.Training">
-    insert into training (id, name, create_time, 
-      last_mod_time, type, postures
+  <insert id="insert" parameterType="com.eternal.design.entity.Action">
+    insert into action (id, name, data_file, 
+      mark, create_time, last_mod_time
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{lastModTime,jdbcType=TIMESTAMP}, #{type,jdbcType=SMALLINT}, #{postures,jdbcType=LONGVARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{dataFile,jdbcType=VARCHAR}, 
+      #{mark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastModTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.eternal.design.entity.Training">
-    insert into training
+  <insert id="insertSelective" parameterType="com.eternal.design.entity.Action">
+    insert into action
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -140,17 +117,17 @@
       <if test="name != null">
         name,
       </if>
+      <if test="dataFile != null">
+        data_file,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
       <if test="lastModTime != null">
         last_mod_time,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="postures != null">
-        postures,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -160,28 +137,28 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="dataFile != null">
+        #{dataFile,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="lastModTime != null">
         #{lastModTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=SMALLINT},
-      </if>
-      <if test="postures != null">
-        #{postures,jdbcType=LONGVARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.eternal.design.entity.TrainingExample" resultType="java.lang.Long">
-    select count(*) from training
+  <select id="countByExample" parameterType="com.eternal.design.entity.ActionExample" resultType="java.lang.Long">
+    select count(*) from action
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update training
+    update action
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -189,51 +166,46 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.dataFile != null">
+        data_file = #{record.dataFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mark != null">
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.lastModTime != null">
         last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=SMALLINT},
-      </if>
-      <if test="record.postures != null">
-        postures = #{record.postures,jdbcType=LONGVARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update training
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP},
-      type = #{record.type,jdbcType=SMALLINT},
-      postures = #{record.postures,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map">
-    update training
+    update action
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
+      data_file = #{record.dataFile,jdbcType=VARCHAR},
+      mark = #{record.mark,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP},
-      type = #{record.type,jdbcType=SMALLINT}
+      last_mod_time = #{record.lastModTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eternal.design.entity.Training">
-    update training
+  <update id="updateByPrimaryKeySelective" parameterType="com.eternal.design.entity.Action">
+    update action
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dataFile != null">
+        data_file = #{dataFile,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -241,30 +213,16 @@
       <if test="lastModTime != null">
         last_mod_time = #{lastModTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=SMALLINT},
-      </if>
-      <if test="postures != null">
-        postures = #{postures,jdbcType=LONGVARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.eternal.design.entity.Training">
-    update training
+  <update id="updateByPrimaryKey" parameterType="com.eternal.design.entity.Action">
+    update action
     set name = #{name,jdbcType=VARCHAR},
+      data_file = #{dataFile,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      last_mod_time = #{lastModTime,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=SMALLINT},
-      postures = #{postures,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.eternal.design.entity.Training">
-    update training
-    set name = #{name,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      last_mod_time = #{lastModTime,jdbcType=TIMESTAMP},
-      type = #{type,jdbcType=SMALLINT}
+      last_mod_time = #{lastModTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

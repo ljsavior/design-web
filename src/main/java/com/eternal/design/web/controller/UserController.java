@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,11 +127,19 @@ public class UserController {
         return new Result(success, msg, null);
     }
 
-    @RequestMapping("/user/usernameList.json")
+    @RequestMapping("/user/patientInfoList.json")
     @ResponseBody
-    public Object usernameList() {
-        return userService.findAll().stream()
-                .map(User::getUsername)
+    public Object patientInfoList(HttpSession session) {
+        User currentUser = (User)session.getAttribute("current_user");
+
+        return userService.findPatientListByCoachId(currentUser.getId())
+                .stream()
+                .map(u -> {
+                    JSONObject obj = new JSONObject(2);
+                    obj.put("id", u.getId());
+                    obj.put("username", u.getUsername());
+                    return obj;
+                })
                 .collect(Collectors.toList());
     }
 

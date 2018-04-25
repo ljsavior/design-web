@@ -148,4 +148,16 @@ public class UserServiceImpl implements UserService {
                 .map(CoachPatientRelationship::getId)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<User> findPatientListByCoachId(Integer coachId) {
+        List<Integer> patientIdList = findPatientIdListByCoachId(coachId);
+        if(CollectionUtils.isEmpty(patientIdList)) {
+            return Collections.emptyList();
+        }
+
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andIdIn(patientIdList);
+        return userMapper.selectByExample(userExample);
+    }
 }

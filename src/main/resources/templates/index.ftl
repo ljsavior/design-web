@@ -55,7 +55,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
-                    Admin
+                    数据管理系统
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
@@ -67,27 +67,13 @@
                         <img class="nav-user-photo" src="${rc.contextPath}/assets/avatars/user.jpg" alt="Jason's Photo" />
                         <span class="user-info">
                             <small>Welcome,</small>
-                            Admin
+                            ${current_user.username}
                         </span>
 
                         <i class="icon-caret-down"></i>
                     </a>
 
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li>
-                            <a href="#">
-                                <i class="icon-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <i class="icon-user"></i>
-                                Profile
-                            </a>
-                        </li>
-
                         <li class="divider"></li>
 
                         <li>
@@ -234,11 +220,21 @@
 <@includeX template="${target_view_name!}_js.ftl" default_template="empty.ftl" />
 
 <script type="text/javascript">
+    String.prototype.endWith = function(s){
+        if (s == null || s == "" || this.length == 0 || s.length > this.length)
+            return false;
+        if (this.substring(this.length - s.length) == s)
+            return true;
+        else
+            return false;
+        return true;
+    }
+
     $(function () {
         var current_url = window.location.href;
-        var target_url = current_url.substring(current_url.indexOf('${rc.contextPath}'), current_url.indexOf('.htm') + 4);
+        current_url = current_url.substring(0, current_url.indexOf('.htm') + 4);
         $('#menu_bar').find('a').each(function() {
-            if($(this).attr('href') === target_url) {
+            if(current_url.endWith($(this).attr('href'))) {
                 var obj = $(this).parent('li');
                 if(obj !== undefined) {
                     obj.addClass('active');

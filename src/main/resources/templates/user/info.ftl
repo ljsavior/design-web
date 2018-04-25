@@ -40,7 +40,7 @@
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 性别 </label>
 
                 <div class="col-sm-9">
-                    <select id="type" name="sex">
+                    <select id="sex" name="sex">
                         <option value="0" <#if item?? && item.sex == 0>selected</#if>>男</option>
                         <option value="1" <#if item?? && item.sex == 1>selected</#if>>女</option>
                     </select>

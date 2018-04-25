@@ -29,7 +29,7 @@
     completeRateTrend.setOption({
         title: [{
             left: 'center',
-            text: '训练动作完成度(%)'
+            text: '训练完成度(%)'
         }],
         tooltip: {
             trigger: 'axis',
@@ -42,7 +42,7 @@
             splitLine: {show: true}
         }],
         series: [{
-            name: '动作完成度',
+            name: '完成度',
             type: 'line',
             showSymbol: false,
             data: []
@@ -51,29 +51,31 @@
 
 
     $(document).ready(function() {
-        $.get('${rc.contextPath}/user/usernameList.json').done(function (data) {
-            $('#username').empty();
+        $.get('${rc.contextPath}/user/patientInfoList.json').done(function (data) {
             $.each(data, function(index, element) {
-                $("#username").append('<option value="' + element + '">' + element + '</option>');
+                $("#userId").append('<option value="' + element.id + '">' + element.username + '</option>');
             });
         });
     });
 
 
     function loadTrend() {
-        var username = $('#username').val();
+        var userId = $('#userId').val();
+        var trainingType = $('#trainingType').val();
+        var trainingTypeName = trainingType === "0" ? "姿势训练" : "动作训练";
         $.ajax({
             type:'post',
             url:'${rc.contextPath}/trainingRecord/trend.json',
             data:{
-                username: username
+                userId: userId,
+                trainingType: trainingType
             },
             cache:false,
             dataType:'json',
             success:function(result) {
                 if(result.success === true) {
-                    showTrend(timeUsedTrend, username + "-训练总用时趋势(秒)", result.data.createTimeList, result.data.timeUsedList);
-                    showTrend(completeRateTrend, username + "-训练动作完成度(%)", result.data.createTimeList, result.data.completeRateList);
+                    showTrend(timeUsedTrend, result.data.username + "-" + trainingTypeName + "总用时趋势(秒)", result.data.createTimeList, result.data.timeUsedList);
+                    showTrend(completeRateTrend, result.data.username + "-" + trainingTypeName + "完成度(%)", result.data.createTimeList, result.data.completeRateList);
                 }
             }
         });

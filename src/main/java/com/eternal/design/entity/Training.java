@@ -11,6 +11,8 @@ public class Training {
 
     private Date lastModTime;
 
+    private Short type;
+
     private String postures;
 
     public Integer getId() {
@@ -43,6 +45,14 @@ public class Training {
 
     public void setLastModTime(Date lastModTime) {
         this.lastModTime = lastModTime;
+    }
+
+    public Short getType() {
+        return type;
+    }
+
+    public void setType(Short type) {
+        this.type = type;
     }
 
     public String getPostures() {

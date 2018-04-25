@@ -12,8 +12,23 @@
             <div class="widget-body">
                 <div class="widget-main">
                     <form class="form-inline">
-                        <input type="text" id="username" class="input-large" placeholder="用户名称" />
+                        <select id="patientId">
+                            <option value="">全部病患</option>
+                            <#if patientList??>
+                                <#list patientList as p>
+                                    <option value="${p.id}">${p.username}</option>
+                                </#list>
+                            </#if>
+                        </select>
+
+                        <select id="trainingType">
+                            <option value="">全部训练</option>
+                            <option value="0">姿势训练</option>
+                            <option value="1">动作训练</option>
+                        </select>
+
                         <input type="text" id="trainingName" class="input-large" placeholder="训练名称" />
+
                         <button type="button" class="btn btn-info btn-sm" onclick="refreshTable()">
                             查询
                         </button>
@@ -33,8 +48,9 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>用户名称</th>
+                    <th>训练者</th>
                     <th>训练名称</th>
+                    <th>训练类型</th>
                     <th>用时列表</th>
                     <th>完成状态列表</th>
                     <th>

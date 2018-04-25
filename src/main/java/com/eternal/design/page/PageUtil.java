@@ -6,6 +6,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -36,6 +37,18 @@ public class PageUtil {
         result.put("draw", pageResult.getDraw());
         result.put("recordsFiltered", pageResult.getCount());
         result.put("recordsTotal", pageResult.getCount());
+        return result;
+    }
+
+    public static <T> JSONObject emptyResult() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        int draw = Integer.parseInt(request.getParameter("draw"));
+
+        JSONObject result = new JSONObject();
+        result.put("data", Collections.emptyList());
+        result.put("draw", draw);
+        result.put("recordsFiltered",0);
+        result.put("recordsTotal", 0);
         return result;
     }
 

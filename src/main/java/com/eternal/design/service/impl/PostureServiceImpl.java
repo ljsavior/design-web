@@ -43,11 +43,9 @@ public class PostureServiceImpl implements PostureService {
 
     @Override
     public List<Posture> findByIds(List<Integer> idList) {
-        PostureExample postureExample = new PostureExample();
-        PostureExample.Criteria criteria = postureExample.createCriteria();
+        PostureExample example = new PostureExample();
+        example.createCriteria().andIdIn(idList);
 
-        criteria.andIdIn(idList);
-
-        return postureMapper.selectByExampleWithBLOBs(postureExample);
+        return postureMapper.selectByExampleWithBLOBs(example);
     }
 }

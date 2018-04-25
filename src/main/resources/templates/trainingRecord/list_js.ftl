@@ -14,8 +14,9 @@
             "ajax": {
                 "url": "${rc.contextPath}/trainingRecord/query.json",
                 "data": function(d) {
-                    d.username = $('#username').val();
+                    d.patientId = $('#patientId').val();
                     d.trainingName = $('#trainingName').val();
+                    d.trainingType = $('#trainingType').val();
                 }
             },
             "columnDefs": [
@@ -30,7 +31,7 @@
                             '</a>';
                     return showChartButton;
                 },
-                "targets": 6
+                "targets": 7
             }]
         });
 

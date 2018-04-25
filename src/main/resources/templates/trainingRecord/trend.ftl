@@ -10,7 +10,11 @@
             <div class="widget-body">
                 <div class="widget-main">
                     <form class="form-inline">
-                        <select class="input-large" id="username">
+                        <select class="input-large" id="userId">
+                        </select>
+                        <select class="input-large" id="trainingType">
+                            <option value="0">姿势训练</option>
+                            <option value="1">动作训练</option>
                         </select>
                         <button type="button" class="btn btn-info btn-sm" onclick="loadTrend()">
                             查询

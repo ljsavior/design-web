@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TrainingExample {
+public class ActionExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TrainingExample() {
+    public ActionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -235,6 +235,146 @@ public class TrainingExample {
             return (Criteria) this;
         }
 
+        public Criteria andDataFileIsNull() {
+            addCriterion("data_file is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileIsNotNull() {
+            addCriterion("data_file is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileEqualTo(String value) {
+            addCriterion("data_file =", value, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileNotEqualTo(String value) {
+            addCriterion("data_file <>", value, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileGreaterThan(String value) {
+            addCriterion("data_file >", value, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileGreaterThanOrEqualTo(String value) {
+            addCriterion("data_file >=", value, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileLessThan(String value) {
+            addCriterion("data_file <", value, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileLessThanOrEqualTo(String value) {
+            addCriterion("data_file <=", value, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileLike(String value) {
+            addCriterion("data_file like", value, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileNotLike(String value) {
+            addCriterion("data_file not like", value, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileIn(List<String> values) {
+            addCriterion("data_file in", values, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileNotIn(List<String> values) {
+            addCriterion("data_file not in", values, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileBetween(String value1, String value2) {
+            addCriterion("data_file between", value1, value2, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataFileNotBetween(String value1, String value2) {
+            addCriterion("data_file not between", value1, value2, "dataFile");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkIsNull() {
+            addCriterion("mark is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkIsNotNull() {
+            addCriterion("mark is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkEqualTo(String value) {
+            addCriterion("mark =", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkNotEqualTo(String value) {
+            addCriterion("mark <>", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkGreaterThan(String value) {
+            addCriterion("mark >", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkGreaterThanOrEqualTo(String value) {
+            addCriterion("mark >=", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkLessThan(String value) {
+            addCriterion("mark <", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkLessThanOrEqualTo(String value) {
+            addCriterion("mark <=", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkLike(String value) {
+            addCriterion("mark like", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkNotLike(String value) {
+            addCriterion("mark not like", value, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkIn(List<String> values) {
+            addCriterion("mark in", values, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkNotIn(List<String> values) {
+            addCriterion("mark not in", values, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkBetween(String value1, String value2) {
+            addCriterion("mark between", value1, value2, "mark");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarkNotBetween(String value1, String value2) {
+            addCriterion("mark not between", value1, value2, "mark");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -352,66 +492,6 @@ public class TrainingExample {
 
         public Criteria andLastModTimeNotBetween(Date value1, Date value2) {
             addCriterion("last_mod_time not between", value1, value2, "lastModTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIsNull() {
-            addCriterion("type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIsNotNull() {
-            addCriterion("type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeEqualTo(Short value) {
-            addCriterion("type =", value, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeNotEqualTo(Short value) {
-            addCriterion("type <>", value, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeGreaterThan(Short value) {
-            addCriterion("type >", value, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeGreaterThanOrEqualTo(Short value) {
-            addCriterion("type >=", value, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeLessThan(Short value) {
-            addCriterion("type <", value, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeLessThanOrEqualTo(Short value) {
-            addCriterion("type <=", value, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIn(List<Short> values) {
-            addCriterion("type in", values, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeNotIn(List<Short> values) {
-            addCriterion("type not in", values, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeBetween(Short value1, Short value2) {
-            addCriterion("type between", value1, value2, "type");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeNotBetween(Short value1, Short value2) {
-            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
     }

@@ -3,25 +3,27 @@ package com.eternal.design.web.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.eternal.design.common.DateFormatUtil;
-import com.eternal.design.entity.Posture;
-import com.eternal.design.entity.Training;
-import com.eternal.design.entity.TrainingRecord;
-import com.eternal.design.entity.TrainingRecordExample;
+import com.eternal.design.entity.*;
 import com.eternal.design.page.PageResult;
 import com.eternal.design.page.PageUtil;
 import com.eternal.design.service.PostureService;
 import com.eternal.design.service.TrainingRecordService;
 import com.eternal.design.service.TrainingService;
+import com.eternal.design.service.UserService;
 import com.eternal.design.web.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -36,32 +38,55 @@ public class TrainingRecordController {
     @Autowired
     private PostureService postureService;
 
+    @Autowired
+    private UserService userService;
+
 
 
     @RequestMapping("/trainingRecord/list.htm")
-    public String list() {
+    public String list(HttpServletRequest request) {
+        User currentUser = (User)request.getSession().getAttribute("current_user");
+        List<User> patientList = userService.findPatientListByCoachId(currentUser.getId());
+        if(!CollectionUtils.isEmpty(patientList)) {
+            request.setAttribute("patientList", patientList);
+        }
+
         return "trainingRecord/list";
     }
 
     @RequestMapping("/trainingRecord/query.json")
     @ResponseBody
-    public Object query(String username, String trainingName) {
+    public Object query(Integer patientId, String trainingName, Short trainingType, HttpSession session) {
+        User currentUser = (User) session.getAttribute("current_user");
+
+        List<User> patientList = userService.findPatientListByCoachId(currentUser.getId());
+        if(CollectionUtils.isEmpty(patientList)) {
+            return PageUtil.emptyResult();
+        }
+
+        Map<Integer, String> idUsernameMap = patientList.stream()
+                .collect(Collectors.toMap(User::getId, User::getUsername));
+
         TrainingRecordExample example = new TrainingRecordExample();
         TrainingRecordExample.Criteria criteria = example.createCriteria();
 
-        if(StringUtils.isNotEmpty(username)) {
-            criteria.andUsernameEqualTo(username);
+        if(patientId != null) {
+            criteria.andUserIdEqualTo(patientId);
         }
         if(StringUtils.isNotEmpty(trainingName)) {
             criteria.andTrainingNameEqualTo(trainingName);
+        }
+        if(trainingType != null) {
+            criteria.andTrainingTypeEqualTo(trainingType);
         }
 
         PageResult<TrainingRecord> pageResult = trainingRecordService.findByPage(example);
         JSONObject result = PageUtil.parseResult(pageResult, trainingRecord -> {
             List<String> row = new ArrayList<>();
             row.add(String.valueOf(trainingRecord.getId()));
-            row.add(trainingRecord.getUsername());
+            row.add(idUsernameMap.getOrDefault(trainingRecord.getUserId(), ""));
             row.add(trainingRecord.getTrainingName());
+            row.add(trainingRecord.getTrainingType() == 0 ? "姿势训练" : "动作训练");
             row.add(trainingRecord.getTimesUsed());
             row.add(trainingRecord.getResult());
             row.add(DateFormatUtil.format(trainingRecord.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
@@ -82,8 +107,6 @@ public class TrainingRecordController {
     @ResponseBody
     public Object timesUsedBar(Integer id) {
         TrainingRecord trainingRecord = this.trainingRecordService.findById(id);
-
-        String username = trainingRecord.getUsername();
         String trainingName = trainingRecord.getTrainingName();
 
         Training training = trainingService.findByName(trainingName);
@@ -100,8 +123,10 @@ public class TrainingRecordController {
         JSONArray timesUsed = JSONArray.parseArray(trainingRecord.getTimesUsed());
 
 
+        User patient = userService.findById(trainingRecord.getUserId());
+
         JSONObject resData = new JSONObject();
-        resData.put("username", username);
+        resData.put("username", patient.getUsername());
         resData.put("trainingName", trainingName);
         resData.put("xAxis", postureNamesList);
         resData.put("series", timesUsed);
@@ -114,7 +139,6 @@ public class TrainingRecordController {
     public Object resultBar(Integer id) {
         TrainingRecord trainingRecord = this.trainingRecordService.findById(id);
 
-        String username = trainingRecord.getUsername();
         String trainingName = trainingRecord.getTrainingName();
 
         Training training = trainingService.findByName(trainingName);
@@ -130,9 +154,10 @@ public class TrainingRecordController {
 
         JSONArray result = JSONArray.parseArray(trainingRecord.getResult());
 
+        User patient = userService.findById(trainingRecord.getUserId());
 
         JSONObject resData = new JSONObject();
-        resData.put("username", username);
+        resData.put("username", patient.getUsername());
         resData.put("trainingName", trainingName);
         resData.put("xAxis", postureNamesList);
         resData.put("series", result);
@@ -148,10 +173,11 @@ public class TrainingRecordController {
 
     @RequestMapping("/trainingRecord/trend.json")
     @ResponseBody
-    public Object trend(String username) {
+    public Object trend(Integer userId, Short trainingType) {
         TrainingRecordExample example = new TrainingRecordExample();
-        TrainingRecordExample.Criteria criteria = example.createCriteria();
-        criteria.andUsernameEqualTo(username);
+        example.createCriteria()
+                .andUserIdEqualTo(userId)
+                .andTrainingTypeEqualTo(trainingType);
         example.setOrderByClause("create_time asc");
 
         List<TrainingRecord> trainingRecordList = trainingRecordService.findByExample(example);
@@ -185,7 +211,10 @@ public class TrainingRecordController {
                 })
                 .collect(Collectors.toList());
 
+        User patient = userService.findById(userId);
+
         JSONObject resData = new JSONObject();
+        resData.put("username", patient.getUsername());
         resData.put("createTimeList", createTimeList);
         resData.put("timeUsedList", timeUsedList);
         resData.put("completeRateList", completeRateList);

@@ -3,8 +3,9 @@
 <mapper namespace="com.eternal.design.mapper.TrainingRecordMapper">
   <resultMap id="BaseResultMap" type="com.eternal.design.entity.TrainingRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="training_name" jdbcType="VARCHAR" property="trainingName" />
+    <result column="training_type" jdbcType="SMALLINT" property="trainingType" />
     <result column="times_used" jdbcType="VARCHAR" property="timesUsed" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="score" jdbcType="INTEGER" property="score" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, training_name, times_used, result, score, create_time
+    id, user_id, training_name, training_type, times_used, result, score, create_time
   </sql>
   <select id="selectByExample" parameterType="com.eternal.design.entity.TrainingRecordExample" resultMap="BaseResultMap">
     select
@@ -102,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.eternal.design.entity.TrainingRecord">
-    insert into training_record (id, username, training_name, 
-      times_used, result, score, 
-      create_time)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{trainingName,jdbcType=VARCHAR}, 
-      #{timesUsed,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP})
+    insert into training_record (id, user_id, training_name, 
+      training_type, times_used, result, 
+      score, create_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{trainingName,jdbcType=VARCHAR}, 
+      #{trainingType,jdbcType=SMALLINT}, #{timesUsed,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.eternal.design.entity.TrainingRecord">
     insert into training_record
@@ -115,11 +116,14 @@
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        username,
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="trainingName != null">
         training_name,
+      </if>
+      <if test="trainingType != null">
+        training_type,
       </if>
       <if test="timesUsed != null">
         times_used,
@@ -138,11 +142,14 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="trainingName != null">
         #{trainingName,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingType != null">
+        #{trainingType,jdbcType=SMALLINT},
       </if>
       <if test="timesUsed != null">
         #{timesUsed,jdbcType=VARCHAR},
@@ -170,11 +177,14 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.trainingName != null">
         training_name = #{record.trainingName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trainingType != null">
+        training_type = #{record.trainingType,jdbcType=SMALLINT},
       </if>
       <if test="record.timesUsed != null">
         times_used = #{record.timesUsed,jdbcType=VARCHAR},
@@ -196,8 +206,9 @@
   <update id="updateByExample" parameterType="map">
     update training_record
     set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
       training_name = #{record.trainingName,jdbcType=VARCHAR},
+      training_type = #{record.trainingType,jdbcType=SMALLINT},
       times_used = #{record.timesUsed,jdbcType=VARCHAR},
       result = #{record.result,jdbcType=VARCHAR},
       score = #{record.score,jdbcType=INTEGER},
@@ -209,11 +220,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.eternal.design.entity.TrainingRecord">
     update training_record
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="trainingName != null">
         training_name = #{trainingName,jdbcType=VARCHAR},
+      </if>
+      <if test="trainingType != null">
+        training_type = #{trainingType,jdbcType=SMALLINT},
       </if>
       <if test="timesUsed != null">
         times_used = #{timesUsed,jdbcType=VARCHAR},
@@ -232,8 +246,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.eternal.design.entity.TrainingRecord">
     update training_record
-    set username = #{username,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=INTEGER},
       training_name = #{trainingName,jdbcType=VARCHAR},
+      training_type = #{trainingType,jdbcType=SMALLINT},
       times_used = #{timesUsed,jdbcType=VARCHAR},
       result = #{result,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},

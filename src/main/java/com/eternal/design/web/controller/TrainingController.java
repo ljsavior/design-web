@@ -30,12 +30,15 @@ public class TrainingController {
 
     @RequestMapping("/training/query.json")
     @ResponseBody
-    public Object query(String name) {
+    public Object query(String name, Short type) {
         TrainingExample example = new TrainingExample();
         TrainingExample.Criteria criteria = example.createCriteria();
 
         if(StringUtils.isNotEmpty(name)) {
             criteria.andNameEqualTo(name);
+        }
+        if(type != null) {
+            criteria.andTypeEqualTo(type);
         }
 
         PageResult<Training> pageResult = trainingService.findByPage(example);
@@ -43,6 +46,7 @@ public class TrainingController {
             List<String> row = new ArrayList<>();
             row.add(String.valueOf(training.getId()));
             row.add(training.getName());
+            row.add(training.getType() == 0 ? "姿势训练" : "动作训练");
             row.add(training.getPostures());
             row.add(DateFormatUtil.format(training.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
 
@@ -63,15 +67,7 @@ public class TrainingController {
 
     @RequestMapping("/training/addOrUpdate.json")
     @ResponseBody
-    public Object addOrUpdate(String id, String name, String postures, Model model) {
-        Training training = new Training();
-        training.setName(name);
-        training.setPostures(postures);
-
-        if(StringUtils.isNotEmpty(id)) {
-            training.setId(Integer.parseInt(id));
-        }
-
+    public Object addOrUpdate(Training training) {
         trainingService.insertOrUpdate(training);
 
         return new Result(true, "提交成功", null);

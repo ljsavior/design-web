@@ -31,4 +31,6 @@ public interface UserService {
     void seCoachPatientRelationship(Integer coachId, Integer patientId);
 
     List<Integer> findPatientIdListByCoachId(Integer coachId);
+
+    List<User> findPatientListByCoachId(Integer coachId);
 }

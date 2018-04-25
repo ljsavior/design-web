@@ -121,19 +121,6 @@
             },
             {
                 "render": function(data, type, row) {
-                    if(data === '0') {
-                        data = 'Both';
-                    } else if(data === '1') {
-                        data = 'LeftArm';
-                    } else if(data === '2') {
-                        data = 'RightArm';
-                    }
-                    return data;
-                },
-                "targets": 3
-            },
-            {
-                "render": function(data, type, row) {
                     var editButton = '<a class="green" href="javascript:void(0);" onclick="editRecord(' + row[0] + ')">' +
                             '<i class="icon-pencil bigger-130"></i>' +
                             '</a>';

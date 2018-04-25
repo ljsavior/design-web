@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="${rc.contextPath}/colorbox/colorbox.css" />
