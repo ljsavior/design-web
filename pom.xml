@@ -225,6 +225,7 @@
                 <filtering>false</filtering>
                 <excludes>
                     <exclude>application.yml</exclude>
+                    <exclude>mybatis-generator.xml</exclude>
                 </excludes>
             </resource>
 
