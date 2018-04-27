@@ -1,7 +1,7 @@
 package com.eternal.design.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.eternal.design.common.DateFormatUtil;
+import com.eternal.design.util.DateFormatUtil;
 import com.eternal.design.entity.Training;
 import com.eternal.design.entity.TrainingExample;
 import com.eternal.design.page.PageResult;

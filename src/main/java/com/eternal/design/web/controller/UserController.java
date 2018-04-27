@@ -1,7 +1,7 @@
 package com.eternal.design.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.eternal.design.common.DateFormatUtil;
+import com.eternal.design.util.DateFormatUtil;
 import com.eternal.design.entity.User;
 import com.eternal.design.entity.UserExample;
 import com.eternal.design.page.PageResult;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;

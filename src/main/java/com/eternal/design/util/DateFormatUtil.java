@@ -1,4 +1,4 @@
-package com.eternal.design.common;
+package com.eternal.design.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
