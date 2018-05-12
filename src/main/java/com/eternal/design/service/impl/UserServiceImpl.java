@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
         CoachPatientRelationshipExample example = new CoachPatientRelationshipExample();
         example.createCriteria().andCoachUserIdEqualTo(coachId);
         return coachPatientRelationshipMapper.selectByExample(example).stream()
-                .map(CoachPatientRelationship::getId)
+                .map(CoachPatientRelationship::getPatientUserId)
                 .collect(Collectors.toList());
     }
 

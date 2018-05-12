@@ -59,6 +59,11 @@ mybatis:
 
 logging:
   config: classpath:log4j2.yml
+  level:
+    com:
+      eternal:
+        design:
+          mapper: debug
 
 pagehelper:
   helper-dialect: mysql
