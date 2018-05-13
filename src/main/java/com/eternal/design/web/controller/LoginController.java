@@ -1,5 +1,6 @@
 package com.eternal.design.web.controller;
 
+import com.eternal.design.common.Constants;
 import com.eternal.design.entity.Menu;
 import com.eternal.design.entity.User;
 import com.eternal.design.service.MenuService;
@@ -32,10 +33,10 @@ public class LoginController {
     public String login(User user, HttpServletRequest request) {
         User u = userService.findByUsername(user.getUsername());
         if(u != null && u.getPassword().equals(user.getPassword())) {
-            request.getSession().setAttribute("current_user", u);
+            request.getSession().setAttribute(Constants.SYSTEM_LOGIN_USER_KEY, u);
 
             List<Menu> menuList = menuService.selectByUser(u);
-            request.getSession().setAttribute("current_user_menuList", menuList);
+            request.getSession().setAttribute(Constants.SYSTEM_LOGIN_USER_MENU_LIST_KEY, menuList);
             return "redirect:/";
         }
         request.setAttribute("item", user);
@@ -44,8 +45,8 @@ public class LoginController {
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("current_user");
-        session.removeAttribute("current_user_menuList");
+        session.removeAttribute(Constants.SYSTEM_LOGIN_USER_KEY);
+        session.removeAttribute(Constants.SYSTEM_LOGIN_USER_MENU_LIST_KEY);
         return "redirect:/login.htm";
     }
 

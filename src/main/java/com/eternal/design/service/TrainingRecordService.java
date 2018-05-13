@@ -11,7 +11,7 @@ public interface TrainingRecordService {
 
     TrainingRecord findById(Integer id);
 
-    TrainingRecord insertOrUpdate(TrainingRecord trainingRecord);
+    int insertOrUpdate(TrainingRecord trainingRecord);
 
     int deleteById(Integer id);
 

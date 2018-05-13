@@ -1,6 +1,7 @@
 package com.eternal.design.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.eternal.design.common.Constants;
 import com.eternal.design.util.DateFormatUtil;
 import com.eternal.design.entity.User;
 import com.eternal.design.entity.UserExample;
@@ -129,7 +130,7 @@ public class UserController {
     @RequestMapping("/user/patientInfoList.json")
     @ResponseBody
     public Object patientInfoList(HttpSession session) {
-        User currentUser = (User)session.getAttribute("current_user");
+        User currentUser = (User)session.getAttribute(Constants.SYSTEM_LOGIN_USER_KEY);
 
         return userService.findPatientListByCoachId(currentUser.getId())
                 .stream()
@@ -152,7 +153,7 @@ public class UserController {
     @RequestMapping("/user/patientQuery.json")
     @ResponseBody
     public Object patientQuery(String username, HttpSession session) {
-        User currentUser = (User)session.getAttribute("current_user");
+        User currentUser = (User)session.getAttribute(Constants.SYSTEM_LOGIN_USER_KEY);
 
         List<Integer> idList = userService.findPatientIdListByCoachId(currentUser.getId());
 

@@ -27,13 +27,12 @@ public class TrainingRecordServiceImpl implements TrainingRecordService {
     }
 
     @Override
-    public TrainingRecord insertOrUpdate(TrainingRecord trainingRecord) {
+    public int insertOrUpdate(TrainingRecord trainingRecord) {
         if(trainingRecord.getId() == null) {
-            trainingRecordMapper.insertSelective(trainingRecord);
+            return trainingRecordMapper.insertSelective(trainingRecord);
         } else {
-            trainingRecordMapper.updateByPrimaryKeySelective(trainingRecord);
+            return trainingRecordMapper.updateByPrimaryKeySelective(trainingRecord);
         }
-        return trainingRecord;
     }
 
     @Override

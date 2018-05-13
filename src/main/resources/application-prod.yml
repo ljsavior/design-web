@@ -18,9 +18,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
 
     #连接池的配置信息
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
+    initialSize: 50
+    minIdle: 50
+    maxActive: 500
     maxWait: 60000
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000

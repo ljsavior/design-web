@@ -1,5 +1,6 @@
 package com.eternal.design.web.interceptor;
 
+import com.eternal.design.common.Constants;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,7 +14,7 @@ public class LoginInterceptor implements HandlerInterceptor
 
         String url = httpServletRequest.getRequestURI();
 
-        boolean hasLogin = httpServletRequest.getSession().getAttribute("current_user") != null;
+        boolean hasLogin = httpServletRequest.getSession().getAttribute(Constants.SYSTEM_LOGIN_USER_KEY) != null;
         boolean isLoginUrl = "/login.htm".equals(url);
 
         if(!hasLogin && !isLoginUrl) {

@@ -2,6 +2,7 @@ package com.eternal.design.web.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.eternal.design.common.Constants;
 import com.eternal.design.util.DateFormatUtil;
 import com.eternal.design.entity.*;
 import com.eternal.design.page.PageResult;
@@ -27,6 +28,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("/trainingRecord")
 public class TrainingRecordController {
 
     @Autowired
@@ -43,9 +45,9 @@ public class TrainingRecordController {
 
 
 
-    @RequestMapping("/trainingRecord/list.htm")
+    @RequestMapping("/list.htm")
     public String list(HttpServletRequest request) {
-        User currentUser = (User)request.getSession().getAttribute("current_user");
+        User currentUser = (User)request.getSession().getAttribute(Constants.SYSTEM_LOGIN_USER_KEY);
         List<User> patientList = userService.findPatientListByCoachId(currentUser.getId());
         if(!CollectionUtils.isEmpty(patientList)) {
             request.setAttribute("patientList", patientList);
@@ -54,10 +56,10 @@ public class TrainingRecordController {
         return "trainingRecord/list";
     }
 
-    @RequestMapping("/trainingRecord/query.json")
+    @RequestMapping("/query.json")
     @ResponseBody
     public Object query(Integer patientId, String trainingName, Short trainingType, HttpSession session) {
-        User currentUser = (User) session.getAttribute("current_user");
+        User currentUser = (User) session.getAttribute(Constants.SYSTEM_LOGIN_USER_KEY);
 
         List<User> patientList = userService.findPatientListByCoachId(currentUser.getId());
         if(CollectionUtils.isEmpty(patientList)) {
@@ -97,13 +99,20 @@ public class TrainingRecordController {
         return result;
     }
 
-    @RequestMapping("/trainingRecord/detailBar.htm")
+    @RequestMapping("/add.json")
+    @ResponseBody
+    public Object add(TrainingRecord record) {
+        int count = this.trainingRecordService.insertOrUpdate(record);
+        return new Result(true, "", count);
+    }
+
+    @RequestMapping("/detailBar.htm")
     public String detailBar(Integer id, Model model) {
         model.addAttribute("id", id);
         return "trainingRecord/detailBar";
     }
 
-    @RequestMapping("/trainingRecord/timesUsedBar.json")
+    @RequestMapping("/timesUsedBar.json")
     @ResponseBody
     public Object timesUsedBar(Integer id) {
         TrainingRecord trainingRecord = this.trainingRecordService.findById(id);
@@ -134,7 +143,7 @@ public class TrainingRecordController {
         return new Result(true, "", resData);
     }
 
-    @RequestMapping("/trainingRecord/resultBar.json")
+    @RequestMapping("/resultBar.json")
     @ResponseBody
     public Object resultBar(Integer id) {
         TrainingRecord trainingRecord = this.trainingRecordService.findById(id);
@@ -165,13 +174,13 @@ public class TrainingRecordController {
         return new Result(true, "", resData);
     }
 
-    @RequestMapping("/trainingRecord/trend.htm")
+    @RequestMapping("/trend.htm")
     public String trend() {
         return "trainingRecord/trend";
     }
 
 
-    @RequestMapping("/trainingRecord/trend.json")
+    @RequestMapping("/trend.json")
     @ResponseBody
     public Object trend(Integer userId, Short trainingType) {
         TrainingRecordExample example = new TrainingRecordExample();
