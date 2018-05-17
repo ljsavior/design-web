@@ -68,7 +68,7 @@ public class ClientTrainingController {
 
         postureList.forEach(pos -> {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("img", host + "/image" + pos.getPicPath());
+            jsonObject.put("img", host + "/getImage/" + pos.getPicPath());
             jsonObject.put("data", JSONObject.parseObject(pos.getData()));
             result.add(jsonObject);
         });

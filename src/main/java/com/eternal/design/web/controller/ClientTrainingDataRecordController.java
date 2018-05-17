@@ -17,16 +17,10 @@ public class ClientTrainingDataRecordController {
 
     @RequestMapping("/client/trainingRecord/upload.json")
     @ResponseBody
-    public Object upload(Integer userId, String trainingName, String timesUsed, String result) {
-        if(userId == null) {
+    public Object upload(TrainingRecord trainingRecord) {
+        if(trainingRecord.getUserId() == null) {
             return new Result(false, "用户未登录", null);
         }
-
-        TrainingRecord trainingRecord = new TrainingRecord();
-        trainingRecord.setUserId(userId);
-        trainingRecord.setTrainingName(trainingName);
-        trainingRecord.setTimesUsed(timesUsed);
-        trainingRecord.setResult(result);
 
         trainingRecordService.insertOrUpdate(trainingRecord);
 

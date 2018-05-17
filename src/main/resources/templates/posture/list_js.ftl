@@ -112,7 +112,7 @@
             },
             "columnDefs": [{
                 "render": function(data, type, row) {
-                    var img = '<a class="green colorbox_img" href="${rc.contextPath}/image' + data + '">' +
+                    var img = '<a class="green colorbox_img" href="${rc.contextPath}/getImage/' + data + '">' +
                             '<i class="icon-search bigger-130"></i>' +
                             '</a>';
                     return img;
