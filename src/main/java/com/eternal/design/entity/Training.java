@@ -3,6 +3,22 @@ package com.eternal.design.entity;
 import java.util.Date;
 
 public class Training {
+
+    public static void main(String[] args) {
+        String a = "hello2";
+        final String b = "hello";
+        final String c = get();
+
+        String d = b + "2";
+        String e = c + "2";
+        System.out.println(a == d);
+        System.out.println(a == e);
+    }
+
+    public static String get() {
+        return "hello";
+    }
+
     private Integer id;
 
     private String name;

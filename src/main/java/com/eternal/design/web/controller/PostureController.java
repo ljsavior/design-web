@@ -52,6 +52,14 @@ public class PostureController {
         return result;
     }
 
+    @RequestMapping("/posture/get.json")
+    @ResponseBody
+    public Object get(int id) {
+        Posture posture = this.postureService.findById(id);
+        return new Result(true, "", posture);
+    }
+
+
     @RequestMapping("/posture/addOrUpdate.htm")
     public String addOrUpdate(Integer id, Model model) {
         if(id != null) {

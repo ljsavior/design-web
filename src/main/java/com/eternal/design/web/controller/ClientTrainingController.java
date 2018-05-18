@@ -6,6 +6,7 @@ import com.eternal.design.entity.Posture;
 import com.eternal.design.entity.Training;
 import com.eternal.design.service.PostureService;
 import com.eternal.design.service.TrainingService;
+import com.eternal.design.web.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,37 +43,14 @@ public class ClientTrainingController {
         return nameList;
     }
 
-    @RequestMapping("/client/training/getTrainingData.json")
+    @RequestMapping("/client/training/get.json")
     @ResponseBody
-    public Object getTrainingData(HttpServletRequest request, String name) {
-        JSONArray result = new JSONArray();
-
+    public Object getTrainingData(String name) {
         if(StringUtils.isEmpty(name)) {
-            return result;
+            return new Result(false, "", null);
         }
 
         Training training = trainingService.findByName(name);
-
-        if(training == null) {
-            return result;
-        }
-
-        JSONArray postures = JSONArray.parseArray(training.getPostures());
-
-        List<Integer> idList = new ArrayList<>(postures.size());
-        for(int i = 0; i < postures.size(); i++) {
-            idList.add(postures.getInteger(i));
-        }
-
-        List<Posture> postureList = postureService.findByIds(idList);
-
-        postureList.forEach(pos -> {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("img", host + "/getImage/" + pos.getPicPath());
-            jsonObject.put("data", JSONObject.parseObject(pos.getData()));
-            result.add(jsonObject);
-        });
-
-        return result;
+        return new Result(true, "", training);
     }
 }
