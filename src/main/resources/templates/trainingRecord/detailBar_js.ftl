@@ -3,7 +3,7 @@
 <script>
 
     $(document).ready(function() {
-        var id = ${id};
+        var id = ${id?c};
 
         var timesUsedBar = echarts.init(document.getElementById('timesUsedBar'));
         timesUsedBar.setOption({

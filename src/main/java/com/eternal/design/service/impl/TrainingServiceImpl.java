@@ -46,6 +46,12 @@ public class TrainingServiceImpl implements TrainingService {
         return trainingMapper.selectByExampleWithBLOBs(new TrainingExample());
     }
 
+    public List<Training> findByType(Short type) {
+        TrainingExample example = new TrainingExample();
+        example.createCriteria().andTypeEqualTo(type);
+        return trainingMapper.selectByExampleWithBLOBs(example);
+    }
+
     @Override
     public Training findByName(String name) {
         TrainingExample example = new TrainingExample();

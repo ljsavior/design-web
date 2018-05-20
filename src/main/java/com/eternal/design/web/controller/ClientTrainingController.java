@@ -34,8 +34,8 @@ public class ClientTrainingController {
 
     @RequestMapping("/client/training/nameList.json")
     @ResponseBody
-    public Object nameList() {
-        List<String> nameList = trainingService.findAll()
+    public Object nameList(Short type) {
+        List<String> nameList = trainingService.findByType(type)
                 .stream()
                 .map(Training::getName)
                 .collect(Collectors.toList());

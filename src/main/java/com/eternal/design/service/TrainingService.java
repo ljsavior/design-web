@@ -18,5 +18,7 @@ public interface TrainingService {
 
     List<Training> findAll();
 
+    List<Training> findByType(Short type);
+
     Training findByName(String name);
 }
