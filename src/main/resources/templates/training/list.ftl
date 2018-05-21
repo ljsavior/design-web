@@ -12,8 +12,8 @@
             <div class="widget-body">
                 <div class="widget-main">
                     <form class="form-inline">
-                        <input type="text" id="name" class="input-large" placeholder="训练名称" />
-                        <select id="type">
+                        <input type="text" id="trainingName" class="input-large" placeholder="训练名称" />
+                        <select id="trainingType">
                             <option value="">全部训练</option>
                             <option value="0">姿势训练</option>
                             <option value="1">动作训练</option>

@@ -17,4 +17,6 @@ public interface PostureService {
     int deleteById(Integer id);
 
     List<Posture> findByIds(List<Integer> idList);
+
+    List<Posture> findAll();
 }

@@ -276,6 +276,9 @@
             if(params.url !== undefined) {
                 $('#modalBody').load(params.url, params.data, function(response, status, xhr) {
                     $('#myModal').modal('show');
+                    if(params.loadFinishCallback !== undefined) {
+                        params.loadFinishCallback();
+                    }
                 });
                 load = true;
             }

@@ -50,4 +50,9 @@ public class ActionServiceImpl implements ActionService {
 
         return actionMapper.selectByExample(example);
     }
+
+    @Override
+    public List<Action> findALl() {
+        return actionMapper.selectByExample(new ActionExample());
+    }
 }

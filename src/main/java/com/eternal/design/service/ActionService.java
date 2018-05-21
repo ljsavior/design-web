@@ -16,4 +16,6 @@ public interface ActionService {
     int deleteById(Integer id);
 
     List<Action> findByIds(List<Integer> idList);
+
+    List<Action> findALl();
 }

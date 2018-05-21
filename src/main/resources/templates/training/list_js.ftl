@@ -1,7 +1,10 @@
 <script src="${rc.contextPath}/dataTables/js/jquery.dataTables.min.js"></script>
 <script src="${rc.contextPath}/dataTables/js/dataTables.bootstrap.min.js"></script>
+<script src="${rc.contextPath}/assets/js/chosen.jquery.min.js"></script>
 
 <script>
+    var select_id = 'postures';
+
     function addRecord() {
         showModal({
             title: "添加训练",
@@ -12,7 +15,11 @@
                     $.ajax({
                         type:'post',
                         url:'${rc.contextPath}/training/addOrUpdate.json',
-                        data:$("#dataForm").serialize(),
+                        data: {
+                            name: $('#name').val(),
+                            type: $('#type').val(),
+                            postures: '[' + getVal(select_id) + ']'
+                        },
                         cache:false,
                         dataType:'json',
                         success:function(data) {
@@ -30,7 +37,8 @@
                         }
                     });
                 });
-            }
+            },
+            loadFinishCallback: loadFinishCallbackFunc
         });
     }
 
@@ -47,7 +55,12 @@
                     $.ajax({
                         type:'post',
                         url:'${rc.contextPath}/training/addOrUpdate.json',
-                        data:$("#dataForm").serialize(),
+                        data: {
+                            id: $('#id').val(),
+                            name: $('#name').val(),
+                            type: $('#type').val(),
+                            postures: '[' + getVal(select_id) + ']'
+                        },
                         cache:false,
                         dataType:'json',
                         success:function(data) {
@@ -64,7 +77,8 @@
                         }
                     });
                 });
-            }
+            },
+            loadFinishCallback: loadFinishCallbackFunc
         });
     }
 
@@ -95,6 +109,83 @@
 
     }
 
+    function setVal(id, vals) {
+        var selectItem =  $('#' + id);
+        selectItem.val(vals).trigger('chosen:updated');
+        var options = selectItem.find('option');
+        var ul = $('#' + id + '_chosen').find('ul.chosen-choices');
+        var input = ul.children('li.search-field');
+        var chosens = ul.children('li.search-choice');
+        var map = {};
+        chosens.each(function(index,element){
+            var idx = $(element).find('a.search-choice-close').attr('data-option-array-index');
+            map[$(options[idx]).val()]=element;
+        });
+
+        $.each(vals, function(index,value){
+            input.before(map[value]);
+        });
+    }
+
+    function getVal(id) {
+        var options = $('#' + id).find('option');
+        var ul = $('#' + id + '_chosen').find('ul.chosen-choices');
+        var chosens = ul.children('li.search-choice');
+        var val = '';
+        chosens.each(function(index,element){
+            var idx = $(element).find('a.search-choice-close').attr('data-option-array-index');
+            val = val + $(options[idx]).val() + ',';
+        });
+        if(val.length > 0) {
+            val = val.substring(0, val.length - 1);
+        }
+        return val;
+    }
+
+    function loadPostureOrActionByType(type, callback) {
+        var selectItem =  $('#' + select_id);
+        selectItem.val(null).empty().trigger('chosen:updated');
+        $.ajax({
+            type:'post',
+            url:'${rc.contextPath}/training/queryPostureOrActionList.json',
+            data:{
+                type: type
+            },
+            cache:false,
+            dataType:'json',
+            success:function(data) {
+                $.each(data, function(index,value){
+                    selectItem.append(new Option(value.text, value.val, false, false));
+                });
+                selectItem.trigger('chosen:updated');
+                if(callback !== undefined) {
+                    callback();
+                }
+            }
+        });
+    }
+
+    function typeSelectChanged() {
+        loadPostureOrActionByType($('#type').val());
+    }
+
+    function loadFinishCallbackFunc() {
+        $('#' + select_id).chosen({
+            no_results_text: "没有找到 ",
+            search_contains:true,
+            allow_single_deselect:true
+        });
+        $('.chosen-container-multi').css('width', '165px');
+
+        loadPostureOrActionByType($('#type').val(), function() {
+            var originPosturesVal = $('#originPostures').val();
+            if(originPosturesVal.length > 0) {
+                var vals = originPosturesVal.substring(1, originPosturesVal.length - 1).split(',');
+                setVal(select_id, vals);
+            }
+        });
+    }
+
     $(document).ready(function() {
         myDataTable = $('#sample-table-2').DataTable({
             "ordering": false,
@@ -106,8 +197,8 @@
             "ajax": {
                 "url": "${rc.contextPath}/training/query.json",
                 "data": function(d) {
-                    d.name = $('#name').val();
-                    d.type = $('#type').val();
+                    d.name = $('#trainingName').val();
+                    d.type = $('#trainingType').val();
                 }
             },
             "columnDefs": [

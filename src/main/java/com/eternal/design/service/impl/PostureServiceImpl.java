@@ -48,4 +48,9 @@ public class PostureServiceImpl implements PostureService {
 
         return postureMapper.selectByExampleWithBLOBs(example);
     }
+
+    @Override
+    public List<Posture> findAll() {
+        return postureMapper.selectByExampleWithBLOBs(new PostureExample());
+    }
 }
