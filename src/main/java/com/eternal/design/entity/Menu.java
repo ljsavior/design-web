@@ -1,8 +1,9 @@
 package com.eternal.design.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Menu {
+public class Menu implements Serializable{
     private Integer id;
 
     private String text;
